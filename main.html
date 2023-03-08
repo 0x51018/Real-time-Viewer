@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Real-time viewer count and time</title>
+  </head>
+  <body>
+    <h1>Real-time viewer count and time</h1>
+    <p id="time"></p>
+    <p id="viewer-count"></p>
+    
+    <script>
+      // Display the current time
+      var today = new Date();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      document.getElementById("time").innerHTML = "Current time: " + time;
+      
+      // Display the real-time viewer count
+      setInterval(function() {
+        // Make an AJAX request to retrieve the viewer count from the server
+        // Replace "url-to-server-script" with the URL of your server-side script
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("viewer-count").innerHTML = "Current viewers: " + this.responseText;
+          }
+        };
+        xhttp.open("GET", "url-to-server-script", true);
+        xhttp.send();
+      }, 1000); // Update the viewer count every second
+    </script>
+  </body>
+</html>
